@@ -49,7 +49,9 @@ const tituloElemento = document.getElementById("titulo")
 // tituloElemento.style.fontSize = "64px"
 // tituloElemento.innerHTML = "<strong>Testando....</strong>"
 // tituloElemento.innerText = "Testando...."
-
+/**
+    * @type {string[]}
+ */
 var tarefas = [];
 
 const buttonElemento = document.querySelector('button')
@@ -61,17 +63,45 @@ const listaElemento = document.querySelector("ul")
 // listaElemento.innerHTML = '<li class="list-group-item">'+ valor +'</li>'
 
 buttonElemento.addEventListener("click", function() {
-    // console.log("clicou")
     let valor = inputElemento.value;
 
-    tarefas.push(valor)
-
+    /** 
+     * Criando o elemento
+     */
     let itemElemento = document.createElement("li")
     itemElemento.innerText = valor;
     itemElemento.classList.add("list-group-item")
-
+    // adicionando a lista
     listaElemento.appendChild(itemElemento)
-
+    // limpando o input
     inputElemento.value = ""
+    // persistindo os dados
+    tarefas.push(valor)
 
+    localStorage.setItem('tarefas', JSON.stringify(tarefas))
 })
+
+const tarefasStorage = localStorage.getItem('tarefas')
+
+if(tarefasStorage) {
+    /**
+     * @type {string[]}
+     * @summary lista convertida do localstorage
+     */
+    const tarefasConvertida = JSON.parse(tarefasStorage)
+    
+    tarefas = tarefasConvertida
+
+    tarefasConvertida.forEach(function(tarefa) {
+        /** 
+         * Criando o elemento
+         */
+        let itemElemento = document.createElement("li")
+        itemElemento.innerText = tarefa;
+        itemElemento.classList.add("list-group-item")
+        // adicionando a lista
+        listaElemento.appendChild(itemElemento)
+    })
+}
+
+// document.addEventListener('DOMContentLoaded')
