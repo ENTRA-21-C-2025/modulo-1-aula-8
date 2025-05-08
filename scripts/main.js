@@ -57,12 +57,13 @@ var tarefas = [];
 const buttonElemento = document.querySelector('button')
 const inputElemento = document.querySelector("input")
 const listaElemento = document.querySelector("ul")
+const formElemento = document.querySelector('form')
 
 // tarefas.push("item 1")
 // console.log(tarefas)
 // listaElemento.innerHTML = '<li class="list-group-item">'+ valor +'</li>'
 
-buttonElemento.addEventListener("click", function() {
+formElemento.addEventListener("submit", function() {
     let valor = inputElemento.value;
 
     /** 
